@@ -2,10 +2,13 @@
   "name": "cta",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://1api.transitchicago.com/",
   "dependencies": {
+    "babel-loader": "^8.0.6",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "react-scripts": "3.2.0"
+    "react-scripts": "3.2.0",
+    "styled-components": "^4.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
