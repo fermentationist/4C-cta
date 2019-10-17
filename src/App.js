@@ -1,6 +1,6 @@
 import React from 'react';
 import {createGlobalStyle} from "styled-components";
-import BusTracker from "./BusTracker.js";
+import TrainTracker from "./TrainTracker.js";
 const GlobalStyles = createGlobalStyle`
   html {
     box-sizing: border-box;
@@ -21,7 +21,7 @@ function App() {
   return (
     <div className="App">
       <GlobalStyles />
-      <BusTracker />
+      <TrainTracker />
     </div>
   );
 }
