@@ -1,22 +1,25 @@
-import React, {useState, useEffect} from "react";
-import makeKey from "./uniqueKey.js";
-
-const API_KEY = "e22345c93ad34bad94edbc2a46fa90ad";
+import React from "react";
 
 const RouteSelector = props => {
+    const dropdownStyle = {
+        display: "block", 
+        appearance: "none", 
+        width: "50vw",
+        height: "2em",
+        fontSize: "2em",
+        color: "green",
+        fontFamily: "futura",
+    };
     return (
-        <div>
-            <select className="route-selector" onChange={props.onChange}>
-                {
-                    props.stations.map(station => {
-                        return (
-                            <option key={station} value={station}>{station}</option>
-                        )
-                    })
-                }
-            </select>
-            {/* <Display name={state.selectedRoute} etas={state.etas}/> */}
-        </div>
+        <select className="route-selector" onChange={props.onChange} style={dropdownStyle}>
+            {
+                props.stations.map(station => {
+                    return (
+                        <option key={station} value={station}>{station}</option>
+                    )
+                })
+            }
+        </select>
     );
 }
 

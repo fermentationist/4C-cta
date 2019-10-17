@@ -28,7 +28,6 @@ const TrainTracker = props => {
         selectedStation: null,
         etas: []
     });
-    const displayRef = useRef(null);
     useEffect(() => {
         const fetchEta = async id => {
             const url = `https://cors-anywhere.herokuapp.com/www.transitchicago.com/api/1.0/ttarrivals.aspx?key=${API_KEY}&stpid=${id}&outputType=JSON`;

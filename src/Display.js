@@ -1,9 +1,7 @@
 import React from "react";
 import ArrivalCard from "./ArrivalCard.js";
-import makeKey from "./uniqueKey.js";
 
 const Display = props => {
-console.log("TCL: Display -> props", props)
     const routeKey = {
         Org: "Orange Line",
         G: "Green Line",
@@ -13,6 +11,8 @@ console.log("TCL: Display -> props", props)
     return (
         <div className={props.className}> 
             {props.etas.map(eta => {
+                const minTilArrival = (Date.parse(eta.arrT) - Date.now()) / 60000;
+                console.log("TCL: minTilArrival", minTilArrival)
                 {console.log("TCL: props.etas.stpDe", props.etas.stpDe)}
                     return (
                         <React.Fragment>
@@ -20,7 +20,7 @@ console.log("TCL: Display -> props", props)
                                 key={eta.arrT + Date.now()}
                                 name={eta.staNm} 
                                 route={routeKey[eta.rt]} 
-                                eta={eta.arrT} 
+                                eta={(minTilArrival).toFixed(1)} 
                                 dest={eta.stpDe} />
                         </React.Fragment>
                     )
