@@ -21,6 +21,9 @@ console.log("TCL: props", props)
             padding: 0;
             color: blue;
         }
+        h1, h2, h3 {
+            font-family: sans-serif;
+        }
         
     `;
 
@@ -31,7 +34,7 @@ console.log("TCL: props", props)
                 <h2>{props.route}</h2>
                 <h2>{props.dest}</h2>
             </div>
-            <h1 className="eta">{`${props.eta} minutes`}</h1>
+            <h1 className="eta">{props.eta < 1 ? "Arriving" : `${props.eta.toFixed(1)} minutes`}</h1>
         </StyledCard>
     )
 }

@@ -9,6 +9,7 @@ const RouteSelector = props => {
         fontSize: "2em",
         color: "green",
         fontFamily: "futura",
+        margin: "0.5em 0",
     };
     return (
         <select className="route-selector" onChange={props.onChange} style={dropdownStyle}>

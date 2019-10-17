@@ -13,14 +13,17 @@ const StyledDiv = styled.div`
     flex-direction: column;
     align-items: center;
     text-align: center;
+    justify-items: flex-start;
 `;
 const StyledHeader = styled.header`
     width: 100%;
     height: 15vh;
+    margin-top: 1em;
     h1 {
         font-family: futura;
         font-size: 3em;
         color: blue;
+        font-weight: 400;
     }
 `;
 const TrainTracker = props => {
@@ -69,6 +72,7 @@ const TrainTracker = props => {
     }, [state.selectedStation])
 
     const clearDisplay = () => {
+        console.log("clearing...")
         const [ref] = document.getElementsByClassName("display");
         while (ref.firstChild){
             ref.remove(ref.firstChild)
@@ -77,7 +81,7 @@ const TrainTracker = props => {
     return (
         <StyledDiv>
             <StyledHeader>
-                <h1>CTA Bus Tracker</h1>
+                <h1>CTA Train Arrivals</h1>
             </StyledHeader>
             <RouteSelector onChange={stationSelectionHandler} stations={stationNames}/>
             <Display etas={state.etas} className="display"/>

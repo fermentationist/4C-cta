@@ -6,10 +6,15 @@ const Display = props => {
         Org: "Orange Line",
         G: "Green Line",
         Red: "Red Line",
+        Brn: "Brown Line",
+        Pink: "Pink Line",
+        Blue: "Blue Line",
+        P: "Purple Line",
+        
 
     }
     return (
-        <div className={props.className}> 
+        <div className={props.className}>
             {props.etas.map(eta => {
                 const minTilArrival = (Date.parse(eta.arrT) - Date.now()) / 60000;
                 console.log("TCL: minTilArrival", minTilArrival)
@@ -20,7 +25,7 @@ const Display = props => {
                                 key={eta.arrT + Date.now()}
                                 name={eta.staNm} 
                                 route={routeKey[eta.rt]} 
-                                eta={(minTilArrival).toFixed(1)} 
+                                eta={minTilArrival} 
                                 dest={eta.stpDe} />
                         </React.Fragment>
                     )
