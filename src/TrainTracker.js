@@ -31,52 +31,61 @@ const TrainTracker = props => {
         selectedStation: null,
         etas: []
     });
-    useEffect(() => {
-        const fetchEta = async id => {
-            const url = `https://cors-anywhere.herokuapp.com/www.transitchicago.com/api/1.0/ttarrivals.aspx?key=${API_KEY}&stpid=${id}&outputType=JSON`;
-            const eta = await fetch(url)
-                .then((rawdata) => rawdata.json())
-                .then(data => {
-                const newEta = data.ctatt.eta
-                console.log("TCL: newEta", newEta)
-                console.log("TCL: etas", state.etas);
-                setState({
-                    ...state,
-                    etas: [...state.etas, ...newEta],
-                })
-            })
-        }
-        const getEtas = async ids => {
-            ids.map(async id => {
+    
+    const getEtas = async ids => {
+            const fetchEta = async id => {
+                const url = `https://cors-anywhere.herokuapp.com/www.transitchicago.com/api/1.0/ttarrivals.aspx?key=${API_KEY}&stpid=${id}&outputType=JSON`;
+                const eta = await fetch(url)
+                    .then((rawdata) => rawdata.json())
+                    .then(data => {
+                    const newEta = data.ctatt.eta
+                    console.log("TCL: newEta", newEta)
+                    console.log("TCL: etas", state.etas);
+                    setState({
+                        ...state,
+                        etas: [...state.etas, ...newEta],
+                    })
+                });
+            }
+            return ids.map(async id => {
                 const etas = await fetchEta(id);
                 console.log("TCL: id", id);
                 return etas;
-            })
-        }
-        if (state.stopIds) {getEtas(state.stopIds)}
-    }, [state.stopIds]);
+            });
+    }    
 
     const stationSelectionHandler = event => {
+        // clearDisplay();
         const selected = event.currentTarget.value;
         const [station] = stationData.filter(stop => stop.STATION_NAME === selected);
         console.log("station=", station)
         const stopIds = station.STOPS.map(stopData => stopData.STOP_ID);
+        getEtas(stopIds)
         setState({
             ...state,
             selectedStation: selected,
             stopIds,
         });
     }
-    useEffect(() => {
-        clearDisplay();
-    }, [state.selectedStation])
+    // useEffect(() => {
+    //     return function willUnmount () {
+    //         clearDisplay();
+    //     }
+    // }, [])
 
     const clearDisplay = () => {
         console.log("clearing...")
-        const [ref] = document.getElementsByClassName("display");
-        while (ref.firstChild){
-            ref.remove(ref.firstChild)
-        }
+        setState({
+            ...state,
+            selectedStation: null,
+            etas: []
+        })
+        // const [ref] = document.getElementsByClassName("display");
+        // console.log("TCL: clearDisplay -> ref", ref.children)
+        // // ref.innerHTML = "";
+        // while (ref.firstChild){
+        //     ref.remove(ref.firstChild)
+        // }
     }
     return (
         <StyledDiv>

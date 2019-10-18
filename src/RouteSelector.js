@@ -13,6 +13,7 @@ const RouteSelector = props => {
     };
     return (
         <select className="route-selector" onChange={props.onChange} style={dropdownStyle}>
+            <option value={null} readOnly>• please select station •</option>
             {
                 props.stations.map(station => {
                     return (
